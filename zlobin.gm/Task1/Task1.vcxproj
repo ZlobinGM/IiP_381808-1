@@ -146,6 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TrexmernuyVector.cpp" />
+    <ClCompile Include="TrexmernuyVektorTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TrexmernuyVector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
