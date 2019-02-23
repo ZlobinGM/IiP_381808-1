@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream> 
 using namespace std;
-
+// @ZlobinGM Task1
 class Vector3D
 {
 private:
@@ -52,3 +52,4 @@ Vector3D operator*(double d, const Vector3D &vector);
 // Prototips for functions
 ostream& operator<<(ostream& stream, const Vector3D &vector);
 istream& operator>>(istream& stream, Vector3D &vector);
+// @ZlobinGM Task1

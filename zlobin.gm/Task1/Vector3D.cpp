@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream> 
 using namespace std;
-
+// @ZlobinGM Task1 
 Vector3D operator*(double d, const Vector3D & vector) {
 	Vector3D res;
 	res.X = vector.X * d;
@@ -125,3 +125,4 @@ bool Vector3D::operator<(const Vector3D &vector) {
 	return true;
 }
 
+// @ZlobinGM Task1
