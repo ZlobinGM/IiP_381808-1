@@ -4,6 +4,7 @@
 #include "Vector3D.h"
 using namespace std;
 
+// @ZlobinGM Task1 Вариант 2 Версия 1.0
 int main(int argc, char *argv[])
 {
 	setlocale(LC_CTYPE, "Russian");
