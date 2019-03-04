@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream> 
 #include "Matrix.h"
-#include "Exception.h"
+
 using namespace std;
 
 int main(int argc, char *argv[])

@@ -1,5 +1,4 @@
 #include "Matrix.h"
-#include "Exception.h"
 
 void Matrix::NewCreate()
 {
@@ -60,7 +59,8 @@ Matrix::~Matrix()
 	*(const_cast<int*>(&MinSize)) = 0;
 }
 
-void Matrix::setSize(int i)
+void Matrix::setSize(int i) /* Esli yzhe est matrix i nado pomenyat ee Size,
+							pri etom sohraniv yzhe zapisannue znacheniz*/
 {
 	if (i < MinSize || i > MaxSize)
 		throw TMatrixException(matrixOUTOGRANGE);
@@ -115,7 +115,7 @@ bool Matrix::IsDiagonalMain()
 
 int & Matrix::operator()(int i, int j)
 {
-	if (i < MinSize || j < MinSize || i > MaxSize || j > MaxSize)
+	if (i < 0 || j < 0 || i > Size || j > Size)
 		throw TMatrixException(matrixOUTOGRANGE);
 	return matr[i][j];
 }
