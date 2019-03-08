@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TextEditor.cpp" />
+    <ClCompile Include="TextEditorTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextEditor.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{958E75D6-6BB5-485C-888A-8130B9AA166F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -145,8 +152,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
