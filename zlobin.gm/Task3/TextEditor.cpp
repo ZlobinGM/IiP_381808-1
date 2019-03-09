@@ -24,7 +24,7 @@ TextEditor::TextEditor()
 {
 	system("cls");
 	left = top = 2;
-	right = 78;
+	size = 76;
 	gotoxy(left, top);
 	str = "";
 }
@@ -33,30 +33,30 @@ TextEditor::TextEditor(string s)
 {
 	TextEditor::TextEditor();
 	str = s;
-	cout << str;
+	cout << str << endl;
 }
 
-TextEditor::TextEditor(int l, int t, int r)
+TextEditor::TextEditor(int l, int t, int s)
 {
-	if (outOfWindow(r)) throw TTextEditorException(textedOUTOGRANGE);
+	if (outOfWindow(l + s)) throw TTextEditorException(textedOUTOGRANGE);
 
 	system("cls");
 	left = l; top = t;
-	right = r;
+	size = s;
 	gotoxy(left, top);
 	str = "";
 }
 
-TextEditor::TextEditor(int l, int t, int r, string s)
+TextEditor::TextEditor(int l, int t, int s, string st)
 {
-	TextEditor::TextEditor(l, t, r);
-	str = s;
-	cout << str;
+	TextEditor::TextEditor(l, t, s);
+	str = st;
+	cout << str << endl;
 }
 
 TextEditor::~TextEditor()
 {
-	left = top = right = 0;
+	left = top = size = 0;
 	str = "";
 }
 
@@ -65,33 +65,35 @@ void TextEditor::setSize(int x)
 	if (outOfWindow(left + x)) throw TTextEditorException(textedOUTOGRANGE);
 
 	system("cls");
-	right = left + x;
+	size = x;
 	gotoxy(left, top);
 	setStr(str);
-	cout << str;
+	cout << str << endl;
 }
 
 void TextEditor::setLocation(int x, int y)
 {
-	if (outOfWindow(right - left + x)) throw TTextEditorException(textedOUTOGRANGE);
+	if (outOfWindow(size + x)) throw TTextEditorException(textedOUTOGRANGE);
 
 	system("cls");
-	right = right - left + x;
 	left = x;
 	top = y;
 	gotoxy(left, top);
-	cout << str;
+	cout << str << endl;
 }
 
 void TextEditor::setStr(string s)
 {
 	str = s;
-	if (str.length() > right - left)
-		str.resize(right - left);
+	if (str.length() > size)
+		str.resize(size);
 }
 
 string TextEditor::EnterText()
 {
+	system("cls");
+	gotoxy(left, top);
+
 	int x = str.length();
 	char c;
 
@@ -124,7 +126,7 @@ string TextEditor::EnterText()
 		}
 		else
 		{
-			if (str.length() < right - left)
+			if (str.length() < size)
 			{
 				str.insert(x, 1, c);
 				x++;
@@ -139,8 +141,74 @@ string TextEditor::EnterText()
 	gotoxy(left, top + 2);
 	cout << "Final text:";
 	gotoxy(left, top + 3);
-	cout << str;
+	cout << str << endl;
 	return str;
+}
+
+void TextEditor::Menu()
+{
+	while (1)
+	{
+		system("cls");
+		gotoxy(1, 1);
+		cout << endl << "Current location X = " << left << ", Y = " << top << endl;
+		cout << "Current size = " << size << endl;
+		cout << "Menu:" << endl;
+		cout << "1. Enter location and size" << endl;
+		cout << "2. Start work with editor" << endl;
+		cout << "3. Exit" << endl;
+		int choose;
+
+		do {
+			cin >> choose;
+		} while (choose < 1 || choose>3);
+
+		switch (choose)
+		{
+		case 1:
+			do
+			{
+				system("cls");
+				gotoxy(1, 1);
+				cout << endl << "Current location X = " << left << ", Y = " << top << endl;
+				cout << "Current size = " << size << endl;
+				cout << "Menu:" << endl;
+				cout << "1. Change size" << endl;
+				cout << "2. Change location" << endl;
+				cout << "3. Return" << endl;
+
+				do {
+					cin >> choose;
+				} while (choose < 1 || choose>3);
+
+				switch (choose)
+				{
+				case 1:
+					cout << "New size = ";
+					cin >> size;
+					break;
+				case 2:
+					cout << "New X = ";
+					cin >> left;
+					cout << "New Y = ";
+					cin >> top;
+					break;
+				case 3:
+					break;
+				}
+			} while (choose != 3);
+			break;
+		case 2:
+			str = ""; 
+			if (outOfWindow(size + left)) 
+				throw TTextEditorException(textedOUTOGRANGE);
+			EnterText();
+			break;
+		case 3:
+			throw TTextEditorException(textedEND);
+			break;
+		}
+	}
 }
 
 ostream & operator<<(ostream & stream, const TextEditor & texted)
@@ -152,7 +220,7 @@ ostream & operator<<(ostream & stream, const TextEditor & texted)
 istream & operator>>(istream & stream, TextEditor & texted)
 {
 	getline(stream, texted.str);
-	if (texted.str.length() > texted.right - texted.left)
-		texted.str.resize(texted.right - texted.left);
+	if (texted.str.length() > texted.size)
+		texted.str.resize(texted.size);
 	return stream;
 }

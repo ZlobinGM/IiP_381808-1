@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum TTextEditorEXType { textedOUTOGRANGE };
+enum TTextEditorEXType { textedOUTOGRANGE, textedEND};
 struct TTextEditorException
 {
 	TTextEditorEXType extype;	// Typo of exception
@@ -19,8 +19,9 @@ struct TTextEditorException
 class TextEditor
 {
 private:
-	int left, top, right;
+	int left, top, size;
 	string str;
+	string EnterText();								// Editor
 	bool outOfWindow(int);							// Out of consol window?
 	void gotoxy(int, int);							// Function from conio
 	// gotoxy doesn't exist in "conio.h" now
@@ -31,7 +32,7 @@ public:
 	TextEditor(int, int, int, string);				// Konstructor
 	~TextEditor();									// Deconstruct
 
-	int getSize() { return right - left; }			// Get size
+	int getSize() { return size; }			// Get size
 	void setSize(int);								// Set size
 
 	int& X() { return left; }						// Get location X
@@ -39,7 +40,8 @@ public:
 	void setLocation(int, int);						// Set location
 
 	void setStr(string);							// Set string with length conrol
-	string EnterText();								// Editor
+
+	void Menu();									// Menu
 
 	// in and out stream
 	friend ostream& operator<<(ostream&, const TextEditor &);

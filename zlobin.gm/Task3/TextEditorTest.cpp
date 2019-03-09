@@ -15,21 +15,37 @@ int main(int argc, char *argv[])
 	*/
 	TextEditor c1;
 	TextEditor c2("Some string");
-	TextEditor* c3 = new TextEditor(60, 60, 75, "Ultra string");
-	TextEditor* c4 = new TextEditor(6, 6, 12);
-	c4->EnterText();
-
+	TextEditor* c3 = new TextEditor(60, 60, 15, "Ultra string");
+	TextEditor* c4 = new TextEditor(6, 6, 6);
 	TextEditor c5;
 	c5.setStr("Some very very long line, which we will move around consol and change size.");
 	cout << c5;
 	c5.setSize(40);
-	cout << c5.getSize();
+	cout << "Current size = " << c5.getSize() << endl;
 	c5.setLocation(30, 50);
-	cout << c5.X() << " " << c5.Y();
+	cout << "Current location X = " << c5.X()
+		<< ", Y = " << c5.Y() << endl;
 	c5.setSize(20);
-	cout << c5.getSize();
+	cout << "Current size = " << c5.getSize() << endl;
 	c5.setLocation(10, 10);
-	cout << c5.X() << " " << c5.Y();
+	cout << "Current location X = " << c5.X()
+		<< ", Y = " << c5.Y() << endl;
+
+met:
+	try
+	{
+		c4->Menu();
+	}
+	catch (TTextEditorException &exept)
+	{
+		if (exept.extype == textedEND)
+			return 1;
+		else
+		{
+			cout << endl << "Out of window" << endl;
+			goto met;
+		}
+	}
 
 	system("pause");
 	return 0;
