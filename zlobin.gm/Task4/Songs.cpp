@@ -176,11 +176,13 @@ ostream & operator<<(ostream & stream, const Songs & object)
 
 istream & operator>>(istream & stream, Songs & object)
 {
-	stream >> object.current;
-	if (object.current >= object.length)
-		object.getMoreLength(object.current, object.buffer);
-	for (int i = 0; i < object.current; i++)
+	int size;
+	stream >> size;
+	if (size >= object.length)
+		object.getMoreLength(size, object.buffer);
+	for (int i = 0; i < size; i++)
 		stream >> object.songs[i];
+	object.current = size;
 	return stream;
 }
 
@@ -228,10 +230,10 @@ Songs::~Songs()
 
 bool Songs::AddSong(const Song &pesnya)
 {
+	if (current == length)
+		getMoreLength(current, buffer);
 	if (SearchSong(pesnya) >= 0)
 		return false;
-	if (current + 1 == length)
-		getMoreLength(current, buffer);
 	songs[current] = pesnya;
 	current++;
 	this->SortSongs(songs, current);

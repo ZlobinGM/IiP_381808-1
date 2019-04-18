@@ -42,6 +42,7 @@ Song & Song::SetFromConsole()
 
 bool Song::SameAsMask(const Song & obj)
 {
+	return true;
 	int same = 0;
 	for (int i = 0; i < 6; i++)
 		if (obj.info[i] == "Unknown" ||
