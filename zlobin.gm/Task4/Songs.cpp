@@ -48,10 +48,8 @@ void Songs::getMoreLength(int len, int buf)
 	Song* tmp = new Song[length];
 	for (int i = 0; i < current; i++)
 		tmp[i] = songs[i];
-	songs = new Song[length];
-	for (int i = 0; i < current; i++)
-		songs[i] = tmp[i];
-	delete[] tmp;
+	delete[] songs;
+	songs = tmp;
 }
 
 void Songs::gotoxy(int xpos, int ypos)
@@ -159,7 +157,7 @@ void Songs::Menu()
 		case 4:
 			system("cls");
 			gotoxy(1, 1);
-			cout << "Current length: " << this->getCount;
+			cout << "Current length: " << current << endl;
 			system("pause");
 			break;
 		default:
@@ -232,7 +230,7 @@ bool Songs::AddSong(const Song &pesnya)
 {
 	if (SearchSong(pesnya) >= 0)
 		return false;
-	if (current + 1 > length)
+	if (current + 1 == length)
 		getMoreLength(current, buffer);
 	songs[current] = pesnya;
 	current++;

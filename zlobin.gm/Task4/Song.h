@@ -10,12 +10,7 @@ using namespace std;
 class Song
 {
 private:
-	string name;
-	string author;
-	string composer;
-	string executor;
-	string album;
-	string date;
+	string* info;			// name, author, composer, executor, album, date
 public:
 	Song();									// Konstructor
 	Song(const Song &);						// Konstructor copy

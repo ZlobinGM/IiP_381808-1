@@ -2,121 +2,88 @@
 
 Song::Song()
 {
-	name = "";
-	author = "";
-	composer = "";
-	executor = "";
-	album = "";
-	date = "";
+	info = new string[6];
+	for (int i = 0; i < 6; i++)
+		info[i] = "";
 }
 
 Song::Song(const Song &obj)
 {
-	name = obj.name;
-	author = obj.author;
-	composer = obj.composer;
-	executor = obj.executor;
-	album = obj.album;
-	date = obj.date;
+	info = new string[6];
+	for (int i = 0; i < 6; i++)
+		info[i]=obj.info[i];
 }
 
 Song::~Song()
 {
-	name = "";
-	author = "";
-	composer = "";
-	executor = "";
-	album = "";
-	date = "";
+	for (int i = 0; i < 6; i++)
+		info[i] = "";
+	delete[] info;
 }
 
 Song & Song::SetFromConsole()
 {
 	cout << "Name: ";
-	getline(cin, name);
-	if (name == "")name = "Unknown";
+	getline(cin, info[0]);
 	cout << "Author: ";
-	getline(cin, author);
-	if (author == "")author = "Unknown";
+	getline(cin, info[1]);
 	cout << "Composer: ";
-	getline(cin, composer);
-	if (composer == "")composer = "Unknown";
+	getline(cin, info[2]);
 	cout << "Executor: ";
-	getline(cin, executor);
-	if (executor == "")executor = "Unknown";
+	getline(cin, info[3]);
 	cout << "Album: ";
-	getline(cin, album);
-	if (album == "")album = "Unknown";
+	getline(cin, info[4]);
 	cout << "Date(YYYY.MM.DD): ";
-	getline(cin, date);
-	if (date == "")date = "Unknown";
+	getline(cin, info[5]);
+	for (int i = 0; i < 6; i++)
+		if (info[i] == "") info[i] = "Unknown";
 	return *this;
 }
 
 bool Song::SameAsMask(const Song & obj)
 {
-	string infoThis[6] = { name, author, composer, executor, album, date };
-	string infoObj[6] = { obj.name, obj.author, obj.composer, obj.executor, obj.album, obj.date };
-	int total = 6;
-	for (int i = 0; i < 6; i++)
-		if (infoObj[i] == "Unknown") total--;
 	int same = 0;
 	for (int i = 0; i < 6; i++)
-		if (infoObj[i] == infoThis[i] && infoObj[i] != "Unknown") same++;
-	if (same == total)
+		if (obj.info[i] == "Unknown" ||
+			(info[i] == obj.info[i] && obj.info[i] != "Unknown")) same++;
+	if (same == 6)
 		return true;
 	return false;
 }
 
 Song & Song::operator=(const Song &obj)
 {
-	if (obj.name != "skip") name = obj.name;
-	if (obj.author != "skip") author = obj.author;
-	if (obj.composer != "skip") composer = obj.composer;
-	if (obj.executor != "skip") executor = obj.executor;
-	if (obj.album != "skip") album = obj.album;
-	if (obj.date != "skip") date = obj.date;
+	for (int i = 0; i < 6; i++)
+		if (obj.info[i] != "skip") info[i] = obj.info[i];
 	return *this;
 }
 
 bool Song::operator<(const Song &obj)
 {
-	string infoThis[6] = { name, author, composer, executor, album, date };
-	string infoObj[6] = { obj.name, obj.author, obj.composer, obj.executor, obj.album, obj.date };
 	for (int i = 0; i < 6; i++)
-		if (infoObj[i] != infoThis[i]) 
-			return infoThis[i] < infoObj[i];
+		if (info[i] != obj.info[i])
+			return info[i] < obj.info[i];
 	return false;
 }
 
 bool Song::operator>(const Song &obj)
 {
-	string infoThis[6] = { name, author, composer, executor, album, date };
-	string infoObj[6] = { obj.name, obj.author, obj.composer, obj.executor, obj.album, obj.date };
 	for (int i = 0; i < 6; i++)
-		if (infoObj[i] != infoThis[i])
-			return infoThis[i] > infoObj[i];
+		if (info[i] != obj.info[i])
+			return info[i] > obj.info[i];
 	return false;
 }
 
 ostream & operator<<(ostream &stream, const Song & obj)
 {
-	stream << obj.name << " ";
-	stream << obj.author << " ";
-	stream << obj.composer << " ";
-	stream << obj.executor << " ";
-	stream << obj.album << " ";
-	stream << obj.date;
+	for (int i = 0; i < 6; i++)
+		stream << obj.info[i] << " ";
 	return stream;
 }
 
 istream & operator>>(istream &stream, Song &obj)
 {
-	stream >> obj.name;
-	stream >> obj.author;
-	stream >> obj.composer;
-	stream >> obj.executor;
-	stream >> obj.album;
-	stream >> obj.date;
+	for (int i = 0; i < 6; i++)
+		stream >> obj.info[i];
 	return stream;
 }

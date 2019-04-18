@@ -27,9 +27,7 @@ public:
 	Songs(const Songs&);							// Konstructor copy
 	Songs(istream&);								// Konstructor from file
 	~Songs();										// Deconstruct
-
-	int getCount() { return current; }				// Current length
-	
+		
 	bool AddSong(const Song &);						// Add song
 	void DelSong(int);								// Remove song
 
