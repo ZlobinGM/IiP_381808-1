@@ -146,6 +146,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cinema.h" />
+    <ClInclude Include="Hall.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="TicketOffice.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Cinema.cpp" />
+    <ClCompile Include="Hall.cpp" />
+    <ClCompile Include="Session.cpp" />
+    <ClCompile Include="TicketOffice.cpp" />
+    <ClCompile Include="TicketOfficeTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
