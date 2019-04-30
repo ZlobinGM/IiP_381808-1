@@ -9,59 +9,63 @@
 
 using namespace std;
 
-struct order {
-	int code;
-	int count;
-	int** places;
+struct order {						// Sub class 
+	int code;					// Every order goes with unique code
+	int count;					// Count of places in order
+	int** places;				// Array of places's cordinates (row and column)
 
-	void GetRandomCode(int min, int max);
+	void GetRandomCode(int min, int max);		// Random code
 
-	order();
-	order(const order &);
-	order(int _count);
-	~order();
+	order();					// Constructor
+	order(const order &);		// Constructor copy
+	order(int _count);			// Constructor
+	~order();					// Destructor
 
+	// Overload operations
 	order& operator=(const order &);
 	friend ostream& operator<<(ostream&, const order &);
 	friend istream& operator>>(istream&, order &);
 };
 
-class Session
+class Session					// Seace in Cinema
 {
 private:
-	int date;
-	double time;
-	string name;
-	int cost, costVIP;
+	int date;				// Session date
+	double time;			// Session time
+	string name;			// Film name
+	int cost, costVIP;		// Cost of ticket
 
-	int hallNumber;
-	Hall hall;
+	int hallNumber;			// Hall number
+	Hall hall;				// Hall (matrix of empty and not places)
 
-	int orders;
-	int buffer;
-	int length;
+	int orders;				// Count of orders
+	int buffer;				// buffer
+	int length;				// real length 
 	order *ordersInfo;
 
-	void GetMoreOrders(int len, int buf);
-	bool HaveSameCode(int _code);
+	void GetMoreOrders(int len, int buf);		// more place for orders
+	bool HaveSameCode(int _code);				// Check in random code already exist
 
 public:
-	Session();
-	Session(const Session &);
-	~Session();
+	Session();						// Constructor
+	Session(const Session &);		// Constructor copy
+	~Session();						// Constructor
 
+	// Find session by parameters (ans - answer to user What's wrog, cost - cost of tickets)
 	bool CanGoOnThis(int _date, double  _time, string _name, int  _hall, 
 		int  _zone, int  _places, string &_ans, int &_cost);
+	// Add order
 	order AddOrder(int _zone, int  _places);
-
+	// Find session with such code
 	bool CanFindCode(int _date, double _time, string _name, int  _hall, 
 		int  _code);
+	// Remove order by code
 	void RemoveOrder(int _code);
 
 	void ShowOnConsole();
-
+	// Constructor for elements of (array of sessions)
 	void Write(istream &stream, int _hallNumber, Hall _hall);
-
+	// operator
 	friend ostream& operator<<(ostream&, const Session &);
 };
 

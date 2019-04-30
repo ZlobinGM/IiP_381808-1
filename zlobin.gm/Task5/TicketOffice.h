@@ -11,17 +11,18 @@ using namespace std;
 
 class TicketOffice
 {
-	double currentTime;
-	int currentDate;
-	double money;
-	Cinema* base;
+private:
+	double currentTime;				// Time at ticket office
+	int currentDate;				// Date at ticket office
+	double money;					// How much this ticket office earn
+	Cinema* base;					// Reference on base
 public:
-	TicketOffice();
-	TicketOffice(Cinema *);
-	~TicketOffice();
+	TicketOffice();					// Constructor
+	TicketOffice(Cinema *);			// Constructor with reference
+	~TicketOffice();				// Destructor
 
-	void NewOrder();
-	void DeleteOrder();
-	void Menu();									// Menu
+	void NewOrder();				// If user want to form order
+	void DeleteOrder();				// If user want to close order
+	void Menu();					// Menu
 };
 

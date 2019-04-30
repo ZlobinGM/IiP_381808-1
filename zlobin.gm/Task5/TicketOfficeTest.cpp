@@ -14,11 +14,11 @@ int main(int argc, char *argv[])
 	ifstream is;
 	is.open("TicketOffice.txt");
 
-	Cinema c(is);				// From konstructor
+	Cinema c(is);				// Konstructor with stream-parameter
 
 	is.close();
 
-	TicketOffice t(&c);
+	TicketOffice t(&c);			// Constructor with reference-parameter
 	t.Menu();
 
 	ofstream os;

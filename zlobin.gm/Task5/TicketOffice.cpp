@@ -121,7 +121,7 @@ void TicketOffice::Menu()
 		
 		switch (choose)
 		{
-		case 1:
+		case 1:					// Contact with ticket office
 			do
 			{
 				system("cls");
@@ -165,7 +165,7 @@ void TicketOffice::Menu()
 				}
 			} while (choose != 4);
 			break;
-		case 2:
+		case 2:					// Wait menu
 		{
 			do
 			{
